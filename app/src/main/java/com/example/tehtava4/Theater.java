@@ -53,8 +53,22 @@ public class Theater {
         Date date = new Date();
         date = makeDate(date, format, sDate);
 
+        String finalDate, finalMonth;
+
+        if (date.getDate() < 10) {
+            finalDate = "0" + String.valueOf(date.getDate());
+        } else {
+            finalDate = String.valueOf(date.getDate());
+        }
+
+        if (date.getMonth() < 10) {
+            finalMonth = "0" + String.valueOf(date.getMonth() + 1);
+        } else {
+            finalMonth = String.valueOf(date.getMonth() + 1);
+        }
+
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + String.valueOf(id) + "&dt=" +
-                String.valueOf(date.getDate()) + "." + String.valueOf(date.getMonth() + 1) + "." + String.valueOf(date.getYear() + 1900);
+                finalDate + "." + finalMonth + "." + String.valueOf(date.getYear() + 1900);
         System.out.println("URL: " + url);
 
         String showStart;
@@ -142,6 +156,12 @@ public class Theater {
                     Date showStartDate = getDate(showStart, dt);
                     Date showEndDate = getDate(showEnd, dt);
 
+                    /*showStartDate.setDate(date.getDate());
+                    showStartDate.setMonth(date.getMonth());
+                    showStartDate.setYear(date.getYear());
+                    showEndDate.setDate(date.getDate());
+                    showEndDate.setMonth(date.getMonth());
+                    showEndDate.setYear(date.getYear());*/
 
                     if (showEndDate.getMinutes() < 10) {
                         endMinutes = "0" + String.valueOf(showEndDate.getMinutes());

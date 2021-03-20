@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     TextInputEditText date, startTime, endTime;
     String sDate, sStartTime, sEndTime;
 
+    LinearLayout movie;
+
     Date startDate, endDate;
 
     Button applyChanges;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         startTime = (TextInputEditText) findViewById(R.id.startTime);
         endTime = (TextInputEditText) findViewById(R.id.endTime);
 
-        LinearLayout movie = findViewById(R.id.movie);
+        movie = findViewById(R.id.movie);
 
         Button applyChanges = findViewById(R.id.applyChanges);
 
@@ -65,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selected = position;
-                setShowList(theaterList, movie, position);
+                setShowList(theaterList, position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 selected = 0;
-                setShowList(theaterList, movie, 0);
+                setShowList(theaterList, 0);
             }
         });
 
@@ -129,12 +131,12 @@ public class MainActivity extends AppCompatActivity {
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setShowList(theaterList, movie, selected);
+                setShowList(theaterList, selected);
             }
         });
     }
 
-    private void setShowList(TheaterList theaterList, LinearLayout movie, int position) {
+    private void setShowList(TheaterList theaterList, int position) {
         Date date = new Date();
 
         sList = theaterList.getTheaterList().get(position).getShows(sDate, sStartTime, sEndTime);
